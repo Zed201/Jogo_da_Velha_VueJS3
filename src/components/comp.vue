@@ -1,41 +1,43 @@
 <script>
 export default {
     name: "Comp",
-    data() {
-        return {
-            sig: "X"
-        }  
-    },
     props: {
         classes: {
             type: Array
         }
     },
     methods: {
-        alter() {
-            if (this.sig == "X") {
-                this.sig = "O"
-            } else if (this.sig == "O") {
-                this.sig = "X"
-            }
+        Trocar() {
+      let vez = this.$store.state.vez
+      if (vez == "O") {
+        this.$store.commit("vezSet", "X")
+      } else if (vez == "X") {
+        this.$store.commit("vezSet", "O")
+      }
+        },
+        Clicar(e) {
+            e.srcElement.innerHTML = this.$store.state.vez
+            this.Trocar()
         }
-    },
-    
+    }   
 }
 </script>
 <template>
-    <div @click="alter" :class="[classes, 'divi']">{{ sig }}</div>
+    <div :class="[classes, 'divi']" @click="Clicar" id="dvi"></div>
 </template>
 <style scoped>
 div{
+    border: 1px black solid;
+    width: 110px;
+    height: 110px;
+    display: inline-block;
+    background-color: whitesmoke;
+    text-align: center;
     cursor: pointer;
-    display: inline;
-    width: 60px;
-    height: 60px;
-    margin: 10px;
-    line-height: 60px;
-    font-size: 58px;
-    border: 2px solid black;
-    padding: 8px;
+    line-height: 105px;
+    font-size: 115px;
+    border-radius: 2px;
+    font-family: cursive;
+    color: rgba(34, 34, 34, 0.856);
 }
 </style>
